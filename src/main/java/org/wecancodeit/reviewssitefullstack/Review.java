@@ -3,15 +3,21 @@ package org.wecancodeit.reviewssitefullstack;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Review {
+	
 	@Id
 	@GeneratedValue
 	private Long id;
+	
 	private String title;
+	
+	@Lob
 	private String content;
+	
 	private String imageUrl;
 
 	@ManyToOne

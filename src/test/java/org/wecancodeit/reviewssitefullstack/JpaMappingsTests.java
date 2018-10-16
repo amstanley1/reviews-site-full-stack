@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
 
+import java.util.Collection;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -14,6 +15,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest
@@ -81,5 +84,6 @@ public class JpaMappingsTests {
 		Category categoryResult = result.get();
 		assertThat(categoryResult.getReviews(), containsInAnyOrder(review, anotherReview));
 	}
+	
 
 }
