@@ -62,7 +62,7 @@ public class ReviewControllerTest {
 		long arbitraryReviewId = 1;
 		when(reviewRepo.findById(arbitraryReviewId)).thenReturn(Optional.of(review));
 		underTest.findOneReview(arbitraryReviewId, model);
-		verify(model).addAttribute("reviews", review);
+		verify(model).addAttribute("review", review);
 	}
 	
 	@Test

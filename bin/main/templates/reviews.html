@@ -2,6 +2,11 @@
 <html xmlns:th="http://thymeleaf.org">
 	<head>
 		<title>Film Reviews</title>
+		<link
+			th:href="@{https://fonts.googleapis.com/css?family=Roboto:400,700}"
+			rel='stylesheet' type='text/css' />
+		<link href="../static/css/reviewsLayout.css"
+			th:href="@{/css/reviewsLayout.css}" rel="stylesheet" />
 		
 	</head>
 	<body>
@@ -12,10 +17,11 @@
 			<ul>
 				<li>
 					<a th:href="@{/review(id=${review.Id})}">
-						
+						<div class="img-container">
+							<img th:src="@{${'/images/' + review.imageUrl}}" />
+						</div> <!--<img th:src="@{${review.imageUrl}}"/> -->
 						<h4 class = "title" th:text="${review.title}"></h4>
 					</a>
-					
 				</li>
 			</ul>
 		</div>

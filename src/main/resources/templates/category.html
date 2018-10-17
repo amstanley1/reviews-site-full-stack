@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+	<head>
+	
+		<title th:text="${category.name}"></title>
+		
+		<link
+			th:href="@{https://fonts.googleapis.com/css?family=Roboto:400,700}"
+			rel='stylesheet' type='text/css' />
+		<link href="../static/css/reviewsLayout.css"
+			th:href="@{/css/reviewsLayout.css}" rel="stylesheet" />
+	</head>
+	<body>
+		
+		<h1 th:text="${category.name}"></h1>
+		<hr />
+		<div class="grid-container">
+		<div class="review" th:each="review: ${category.reviews}">
+			<ul>
+				<li>
+					<a th:href="@{/review(id=${review.Id})}">
+						<div class="img-container">
+							<img th:src="@{${'/images/' + review.imageUrl}}" />
+						</div> 
+						
+						<h4 class = "title" th:text="${review.title}"></h4>
+					</a>
+					
+				</li>
+			</ul>
+		</div>
+		</div>
+		
+			<a href="http://localhost:8080/show-categories">Back to Categories</a>
+		
+		
+		
+		
+	
+	
+	
+			
+	</body>
+</html>

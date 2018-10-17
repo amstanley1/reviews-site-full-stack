@@ -33,7 +33,7 @@ public class JpaMappingsTests {
 	
 	@Test
 	public void shouldSaveAndLoadReview() {
-		Review review = reviewRepo.save(new Review("review", "content", "imageUrl"));
+		Review review = reviewRepo.save(new Review("review", "content", "imageUrl", null));
 		long reviewId = review.getId();
 		
 		entityManager.flush();
@@ -46,7 +46,7 @@ public class JpaMappingsTests {
 	
 	@Test
 	public void shouldGenerateReviewId() {
-		Review review = reviewRepo.save(new Review("review", "content", "imageUrl"));
+		Review review = reviewRepo.save(new Review("review", "content", "imageUrl", null));
 		long reviewId = review.getId();
 		
 		entityManager.flush();
@@ -71,10 +71,13 @@ public class JpaMappingsTests {
 	
 	@Test
 	public void shouldEstablishCategoryToReviewsRelationship() {
-		Review review = reviewRepo.save(new Review("review", "content", "imageUrl"));
-		Review anotherReview = reviewRepo.save(new Review("anotherReview", "content", "imageUrl"));
 		
-		Category category = categoryRepo.save(new Category("category", review, anotherReview));
+		Category category = categoryRepo.save(new Category("category"));
+		/*reviewRepo.save(review);
+		reviewRepo.save(anotherReview);*/
+		Review review = reviewRepo.save(new Review("review", "content", "imageUrl", category));
+		Review anotherReview = reviewRepo.save(new Review("anotherReview", "content", "imageUrl", category));
+		
 		long categoryId = category.getId();
 		
 		entityManager.flush();

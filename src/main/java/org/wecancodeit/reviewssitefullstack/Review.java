@@ -48,10 +48,11 @@ public class Review {
 		
 	}
 	
-	public Review(String title, String content, String imageUrl) {
+	public Review(String title, String content, String imageUrl,Category category) {
 		this.title = title;
 		this.content = content;
 		this.imageUrl = imageUrl;
+		this.category = category;
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,7 +17,7 @@ public class Category {
 	long id;
 	String name;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "category")
 	private Collection<Review> reviews;
 	
 	public long getId() {
@@ -34,9 +35,9 @@ public class Category {
 		
 	}
 	
-	public Category(String name, Review...reviews) {
+	public Category(String name) {
 		this.name = name;
-		this.reviews = new HashSet<>(Arrays.asList(reviews));
+		
 		
 	}
 	

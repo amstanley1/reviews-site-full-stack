@@ -2,12 +2,24 @@
 <html xmlns:th="http://thymeleaf.org">
 
 	<head>
-		
-			
-	</head>
 
+		<title th:text="${review.title}"></title>
+		
+			<link
+				th:href="@{https://fonts.googleapis.com/css?family=Roboto:400,700}"
+				rel='stylesheet' type='text/css' />
+			<link href="../static/css/reviewLayout.css"
+				th:href="@{/css/reviewLayout.css}" rel="stylesheet" />
+	</head>
 	<body>
+	
 		<h1 th:text="${review.title}"></h1>
-		<a href="http://localhost:8080/show-reviews">Back to home</a>
+		<p th:text="Category + ${category.name}"></p>
+		<hr />
+		<img th:src="@{${'/images/' + review.imageUrl}}" />
+		<p th:text="${review.content}"></p>
+	
+		
+		<a href="http://localhost:8080/show-reviews">Back to reviews</a>
 	</body>
 </html>
