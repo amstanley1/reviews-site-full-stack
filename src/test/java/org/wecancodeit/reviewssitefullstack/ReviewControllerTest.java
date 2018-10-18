@@ -46,7 +46,7 @@ public class ReviewControllerTest {
 		long arbitraryCategoryId = 1;
 		when(categoryRepo.findById(arbitraryCategoryId)).thenReturn(Optional.of(category));
 		underTest.findOneCategory(arbitraryCategoryId, model);
-		verify(model).addAttribute("categories", category);
+		verify(model).addAttribute("category", category);
 	}
 	
 	@Test

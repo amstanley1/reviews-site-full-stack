@@ -14,7 +14,7 @@
 	<body>
 	
 		<h1 th:text="${review.title}"></h1>
-		<p th:text="Category + ${category.name}"></p>
+		<p class="category"> <!-- Category: --> <a th:href="@{${'http://localhost:8080/category?id=' + category.id}}" + ><span th:text="${category.name}"></span></a></p>
 		<hr />
 		<img th:src="@{${'/images/' + review.imageUrl}}" />
 		<p th:text="${review.content}"></p>

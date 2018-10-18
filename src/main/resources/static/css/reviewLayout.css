@@ -41,14 +41,15 @@ p {
 }
 
 .category {
-	font-size: 1.5em;
+	font-size: 2.5em;
 	text-align: center;
+	line-height: 0.5em;
 }
 
 .tags {
 	text-align: center;
 }
 
-a:hover {
+a:hover, .category:hover {
 	color: grey;
 }
