@@ -8,18 +8,18 @@
 			<link
 				th:href="@{https://fonts.googleapis.com/css?family=Roboto:400,700}"
 				rel='stylesheet' type='text/css' />
-			<link href="../static/css/reviewLayout.css"
-				th:href="@{/css/reviewLayout.css}" rel="stylesheet" />
+			<link href="../static/css/singleLayout.css"
+				th:href="@{/css/singleLayout.css}" rel="stylesheet" />
 	</head>
 	<body>
 	
 		<h1 th:text="${review.title}"></h1>
-		<p class="category"> <!-- Category: --> <a th:href="@{${'http://localhost:8080/category?id=' + category.id}}" + ><span th:text="${category.name}"></span></a></p>
+		<p> <!-- Category: --> <a th:href="@{${'http://localhost:8080/category?id=' + category.id}}"><span class="category" th:text="${category.name}"></span></a></p>
 		<hr />
 		<img th:src="@{${'/images/' + review.imageUrl}}" />
 		<p th:text="${review.content}"></p>
 	
 		
-		<a href="http://localhost:8080/show-reviews">Back to reviews</a>
+		<a href="http://localhost:8080/show-reviews">Back to all reviews</a>
 	</body>
 </html>

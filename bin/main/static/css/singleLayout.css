@@ -12,12 +12,6 @@ h1 {
 	text-align: center;
 }
 
-h4 {
-	color: white;
-	text-align: center;
-	margin: 10px;
-}
-
 hr {
 	border: 0;
 	height: 1px;
@@ -25,9 +19,10 @@ hr {
 	background-image: linear-gradient(to right, #ccc, #333, #ccc);
 }
 
-ul {
-	list-style: none;
-	padding: 0;
+img {
+	display: block;
+	width: 50%;
+	margin: 30px auto 10px auto;
 }
 
 a {
@@ -39,40 +34,24 @@ a {
 	text-decoration: none;
 	font-weight: 700;
 	color: white;
-}
-
-.category {
-	text-align: center;
-	font-weight: 700;
-	font-size: 1em;
+	
+	
 }
 
 p {
-	font-size: .5em;
 	color: white;
-	margin: 0;
 }
 
-.grid-container {
-	display: grid;
-	grid-template-columns: 30% 30% 30%;
-	justify-content: space-evenly;
+.category {
+	font-size: 1em;
+	text-align: center;
+	line-height: 0.5em;
 }
 
-.img-container {
-	height: 200px;
-	width: 100%;
-	overflow: hidden;
+.tags {
+	text-align: center;
 }
 
-.img-container img {
-	height: auto;
-	width: 100%;
-	position: relative;
-	top: 50%;
-	transform: translateY(-50%);
-}
-
-.title:hover {
+a:hover, .category:hover {
 	color: grey;
 }

@@ -51,6 +51,7 @@ public class ReviewControllerMockMvcTest {
 	public void shouldRouteToSingleReviewView() throws Exception {
 		long arbitraryReviewId = 1;
 		when(reviewRepo.findById(arbitraryReviewId)).thenReturn(Optional.of(review));
+		when(review.getCategory()).thenReturn(category);
 		mvc.perform(get("/review?id=1")).andExpect(view().name(is("review")));
 	}
 
@@ -58,6 +59,7 @@ public class ReviewControllerMockMvcTest {
 	public void shouldBeOkForSingleReview() throws Exception {
 		long arbitraryReviewId = 1;
 		when(reviewRepo.findById(arbitraryReviewId)).thenReturn(Optional.of(review));
+		when(review.getCategory()).thenReturn(category);
 		mvc.perform(get("/review?id=1")).andExpect(status().isOk());
 	}
 	
@@ -69,6 +71,7 @@ public class ReviewControllerMockMvcTest {
 	@Test
 	public void shouldPutSingleReviewIntoModel() throws Exception {
 		when(reviewRepo.findById(1L)).thenReturn(Optional.of(review));
+		when(review.getCategory()).thenReturn(category);
 		mvc.perform(get("/review?id=1")).andExpect(model().attribute("review", is(review)));
 	}
 	
@@ -130,6 +133,9 @@ public class ReviewControllerMockMvcTest {
 		when(categoryRepo.findAll()).thenReturn(allCategories);
 		mvc.perform(get("/show-categories")).andExpect(model().attribute("categories", is(allCategories)));
 	}
+	
+	
+	
 	
 	
 

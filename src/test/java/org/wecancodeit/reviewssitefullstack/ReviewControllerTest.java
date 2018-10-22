@@ -21,10 +21,14 @@ public class ReviewControllerTest {
 	
 	@Mock
 	private Review review;
+	
+	
 	private Review anotherReview;
 	
 	@Mock
 	private Category category;
+	
+	
 	private Category anotherCategory;
 	
 	@Mock
