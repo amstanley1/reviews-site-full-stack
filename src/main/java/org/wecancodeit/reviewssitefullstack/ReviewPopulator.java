@@ -7,28 +7,28 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ReviewPopulator implements CommandLineRunner {
-	
+
 	@Resource
 	ReviewRepository reviewRepo;
-	
+
 	@Resource
 	CategoryRepository categoryRepo;
-	
+
 	@Override
 	public void run(String... args) throws Exception {
-		
+
 		Category drama = new Category("Drama");
 		Category comedy = new Category("Comedy");
 		Category horror = new Category("Horror");
 		Category thriller = new Category("Thriller");
 		Category action = new Category("Action");
-		
+
 		drama = categoryRepo.save(drama);
 		comedy = categoryRepo.save(comedy);
 		horror = categoryRepo.save(horror);
 		thriller = categoryRepo.save(thriller);
 		action = categoryRepo.save(action);
-		
+
 		Review girlOnTheTrain = new Review("The Girl on the Train",
 				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vitae diam dictum, tincidunt felis nec, sodales magna. Mauris fermentum tellus vitae tempor sagittis. Suspendisse potenti. Donec nec laoreet odio, sed faucibus purus. Duis congue ut mauris nec facilisis. Morbi feugiat magna ultricies nulla aliquet vehicula. Proin est nibh, congue non bibendum quis, dapibus in turpis. Integer placerat felis ut elit vestibulum vehicula id non erat. Integer et ex eget metus porta cursus sit amet non turpis. Morbi felis lectus, aliquam vel felis quis, efficitur luctus ante. Phasellus et porttitor nisi. Maecenas ultricies neque eu odio sollicitudin pretium. Mauris aliquet scelerisque mi, eu sagittis libero sollicitudin sit amet. Aliquam eu metus gravida, bibendum ipsum sit amet, dictum sem. Integer accumsan tortor sed sem euismod, id lacinia felis tempus. Fusce ornare vulputate purus, et scelerisque elit fermentum in.",
 				"girlonthetrain.jpg", thriller);
@@ -56,7 +56,7 @@ public class ReviewPopulator implements CommandLineRunner {
 		Review ladyBird = new Review("Lady Bird",
 				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet, urna sed pharetra dignissim, sem urna rutrum metus, eget ornare tortor felis in libero. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis pretium, lectus eu consectetur tempus, nibh eros semper urna, vitae aliquet risus velit vitae nisi. Integer condimentum volutpat velit ut consectetur. In vulputate ut ex vel laoreet. Integer blandit diam dolor, eget cursus ante condimentum et. Maecenas ut consequat lorem, eu fringilla ex. Ut mattis placerat auctor. Nunc ut felis laoreet, scelerisque libero ut, molestie magna. Sed a elit nunc.",
 				"ladybird.jpg", drama);
-		
+
 		girlOnTheTrain = reviewRepo.save(girlOnTheTrain);
 		lastJedi = reviewRepo.save(lastJedi);
 		theWitch = reviewRepo.save(theWitch);
@@ -66,13 +66,5 @@ public class ReviewPopulator implements CommandLineRunner {
 		bridesmaids = reviewRepo.save(bridesmaids);
 		theCabinInTheWoods = reviewRepo.save(theCabinInTheWoods);
 		ladyBird = reviewRepo.save(ladyBird);
-		
-		
-		
-	
-		
 	}
-	
-	
-
 }
