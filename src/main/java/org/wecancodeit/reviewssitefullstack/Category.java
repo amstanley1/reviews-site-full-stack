@@ -16,31 +16,27 @@ public class Category {
 	@GeneratedValue
 	long id;
 	String name;
-	
+
 	@OneToMany(mappedBy = "category")
 	private Collection<Review> reviews;
-	
+
 	public long getId() {
 		return id;
 	}
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public Collection<Review> getReviews() {
 		return reviews;
 	}
-	
+
 	public Category() {
-		
 	}
-	
+
 	public Category(String name) {
 		this.name = name;
-		
-		
 	}
-	
-	
+
 }
- 

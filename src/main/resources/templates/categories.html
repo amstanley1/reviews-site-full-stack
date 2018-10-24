@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
-	<head>
-		<title>Categories</title>
-		<link
-			th:href="@{https://fonts.googleapis.com/css?family=Roboto:400,700}"
-			rel='stylesheet' type='text/css' />
-		<link href="../static/css/reviewsLayout.css"
-			th:href="@{/css/reviewsLayout.css}" rel="stylesheet" />
-		
-	</head>
-	<body>
-		<h1>Categories</h1>
-		<hr />
-		<div class="grid-container">
+<head>
+<title>Categories</title>
+<link th:href="@{https://fonts.googleapis.com/css?family=Roboto:400,700}"
+	rel='stylesheet' type='text/css' />
+<link href="../static/css/multiLayout.css"
+	th:href="@{/css/multiLayout.css}" rel="stylesheet" />
+
+</head>
+<body>
+	<h1>Categories</h1>
+	<hr />
+	<div class="grid-container">
 		<div class="category" th:each="category: ${categories}">
 			<ul>
 				<li>
 					<a th:href="@{/category(id=${category.Id})}">
-						
-						<h4 th:text="${category.name}"></h4>
+						<h4 id="show-categories" th:text="${category.name}"></h4>
 					</a>
-					
 				</li>
 			</ul>
 		</div>
 	</div>
+	<a href="http://localhost:8080/show-reviews">Back to all reviews</a>
 </body>
 </html>

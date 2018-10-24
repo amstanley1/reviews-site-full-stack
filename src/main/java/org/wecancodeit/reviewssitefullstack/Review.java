@@ -8,25 +8,25 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Review {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	private String title;
-	
+
 	@Lob
 	private String content;
-	
+
 	private String imageUrl;
 
 	@ManyToOne
 	private Category category;
-	
+
 	public Category getCategory() {
 		return category;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -43,12 +43,11 @@ public class Review {
 		return imageUrl;
 	}
 
-
 	public Review() {
-		
+
 	}
-	
-	public Review(String title, String content, String imageUrl,Category category) {
+
+	public Review(String title, String content, String imageUrl, Category category) {
 		this.title = title;
 		this.content = content;
 		this.imageUrl = imageUrl;
@@ -79,7 +78,4 @@ public class Review {
 			return false;
 		return true;
 	}
-	
-	
-
 }
