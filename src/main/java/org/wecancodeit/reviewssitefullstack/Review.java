@@ -1,9 +1,14 @@
 package org.wecancodeit.reviewssitefullstack;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -22,6 +27,9 @@ public class Review {
 
 	@ManyToOne
 	private Category category;
+	
+	@ManyToMany
+	private Collection<Tag> tags;
 
 	public Category getCategory() {
 		return category;
@@ -42,16 +50,22 @@ public class Review {
 	public String getImageUrl() {
 		return imageUrl;
 	}
+	
+	public Collection<Tag> getTags() {
+	
+		return tags;
+	}
 
 	public Review() {
 
 	}
 
-	public Review(String title, String content, String imageUrl, Category category) {
+	public Review(String title, String content, String imageUrl, Category category, Tag...tags) {
 		this.title = title;
 		this.content = content;
 		this.imageUrl = imageUrl;
 		this.category = category;
+		this.tags = new HashSet<>(Arrays.asList(tags));
 	}
 
 	@Override
@@ -78,4 +92,6 @@ public class Review {
 			return false;
 		return true;
 	}
+
+	
 }
