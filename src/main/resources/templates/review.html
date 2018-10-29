@@ -24,14 +24,34 @@
 					<a class="tag" th:text="${tag.name}"  th:href="@{/tag(id=${tag.Id})}">
 					
 					</a>
+					
 				</li>
-				
+			
 			</ul>
+			
+		</div>
+		<div id="add-tag">
+		<button id="add-tag-button">Add Tag</button>
 		</div>
 	<hr />
 	<img th:src="@{${'/images/' + review.imageUrl}}" />
 	<p th:text="${review.content}"></p>
 	<a href="http://localhost:8080/show-reviews">Back to all reviews</a>
+	<form method="POST" id="add-comment">
+		<div>
+			<label>UserName:</label>
+			<input type="text" name="userName" />
+		</div>
+		<div>
+			<label>Comment</label>
+			<textarea name="content"></textarea>
+		</div>
+		<input type="hidden" id="review-id" name="reviewId" th:attr="value = ${review.id}" />
+		<div>
+			<button th:formaction="@{add-comment}">submit</button>
+		</div>
+	</form>
+	
 	<div id="comments-container">
 		<h2>Comments</h2>
 		<div class="comment" th:each="comment: ${comments}">
@@ -39,5 +59,7 @@
 			<p th:text="${comment.content}"></p>
 		</div>
 	</div>
+	
+	<script th:src="@{/js/review.js}"></script>
 </body>
 </html>

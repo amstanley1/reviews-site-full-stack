@@ -90,3 +90,30 @@ p {
 a:hover, .category:hover {
 	color: grey;
 }
+
+#add-comment {
+	color: white;
+}
+
+textarea {
+	width: 75%;
+	height: 200px;
+}
+
+button#add-tag-button {
+	margin: 0 auto;
+	display: block;
+	background-color: white;
+	border: none;
+	padding: 1em;
+	font-weight: bold;
+}
+
+#add-tag {
+	width: 100%;
+}
+
+#tag-input {
+	margin: 0 auto;
+	display: block;
+}

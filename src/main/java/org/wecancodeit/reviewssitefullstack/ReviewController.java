@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 @Controller
 public class ReviewController {
 
@@ -20,6 +21,9 @@ public class ReviewController {
 	
 	@Resource
 	TagRepository tagRepo;
+	
+	@Resource
+	CommentRepository commentRepo;
 
 	@RequestMapping("/category")
 	public String findOneCategory(@RequestParam(value = "id") long id, Model model) throws CategoryNotFoundException {
@@ -71,6 +75,17 @@ public class ReviewController {
 	public String findAllTags(Model model) {
 		model.addAttribute("tags", tagRepo.findAll());
 		return "tags";
+	}
+	
+	@RequestMapping("/add-comment")
+	public String addComment(String userName, String content, long reviewId, Model model) {
+			Optional<Review> review = reviewRepo.findById(reviewId);
+			Review reviewResult = review.get();
+			Comment newComment = new Comment(userName, content, reviewResult);
+			commentRepo.save(newComment);
+			
+			
+			return "redirect:/review";
 	}
 	
 
