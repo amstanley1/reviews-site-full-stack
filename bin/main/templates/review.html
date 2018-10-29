@@ -16,9 +16,28 @@
 		<a th:href="@{${'http://localhost:8080/category?id=' + category.id}}"><span
 			class="category" th:text="${category.name}"></span></a>
 	</p>
+		<!-- Tags: -->
+		<div>
+			<ul id = "tags-container">
+			
+				<li th:each="tag: ${tags}" id="show-tags">
+					<a class="tag" th:text="${tag.name}"  th:href="@{/tag(id=${tag.Id})}">
+					
+					</a>
+				</li>
+				
+			</ul>
+		</div>
 	<hr />
 	<img th:src="@{${'/images/' + review.imageUrl}}" />
 	<p th:text="${review.content}"></p>
 	<a href="http://localhost:8080/show-reviews">Back to all reviews</a>
+	<div id="comments-container">
+		<h2>Comments</h2>
+		<div class="comment" th:each="comment: ${comments}">
+			<h4 th:text="${comment.userName}"></h4>
+			<p th:text="${comment.content}"></p>
+		</div>
+	</div>
 </body>
 </html>

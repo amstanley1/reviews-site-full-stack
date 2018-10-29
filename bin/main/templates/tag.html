@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+<title th:text="${tag.name}"></title>
+	<link th:href="@{https://fonts.googleapis.com/css?family=Roboto:400,700}"
+		rel='stylesheet' type='text/css' />
+	<link href="../static/css/multiLayout.css"
+		th:href="@{/css/multiLayout.css}" rel="stylesheet" />
+</head>
+<body>
+	<h1 th:text="${tag.name}"></h1>
+	<hr />
+	<div class="grid-container">
+		<div class="review" th:each="review: ${tag.reviews}">
+			<ul>
+				<li>
+					<a th:href="@{/review(id=${review.Id})}">
+						<div class="img-container">
+							<img th:src="@{${'/images/' + review.imageUrl}}" />
+						</div>
+						<h4 class="title" th:text="${review.title}"></h4>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="flex-container">
+		<a href="http://localhost:8080/show-reviews">Back to all reviews</a> 
+		<a href="http://localhost:8080/show-tags">See all tags</a>
+	</div>
+</body>
+</html>
