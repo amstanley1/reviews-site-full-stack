@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 public class ReviewRestController {
 	
@@ -33,6 +32,11 @@ public class ReviewRestController {
 	@PostMapping("/api/review/{id}/tags")
 	public Tag createTag(@RequestBody Tag newTag) {
 		return tagRepo.save(newTag);
+	}
+	
+	@GetMapping("/api/review/{id}")
+	public Review getReview(@PathVariable Long id) {
+		return reviewRepo.findById(id).get();
 	}
 	
 
