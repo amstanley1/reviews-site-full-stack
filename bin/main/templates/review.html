@@ -31,7 +31,7 @@
 			
 		</div>
 		<div id="add-tag">
-		<button id="add-tag-button">Add Tag</button>
+		<button class="add-tag-button" th:data-id="${review.id}">Add Tag</button>
 		</div>
 	<hr />
 	<img th:src="@{${'/images/' + review.imageUrl}}" />

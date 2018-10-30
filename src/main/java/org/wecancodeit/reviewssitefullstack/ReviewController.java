@@ -85,7 +85,7 @@ public class ReviewController {
 			commentRepo.save(newComment);
 			
 			
-			return "redirect:/review";
+			return "redirect:/review?id=" + reviewId;
 	}
 	
 

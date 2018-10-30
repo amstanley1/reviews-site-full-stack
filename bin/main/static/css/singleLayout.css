@@ -100,7 +100,7 @@ textarea {
 	height: 200px;
 }
 
-button#add-tag-button {
+button.add-tag-button {
 	margin: 0 auto;
 	display: block;
 	background-color: white;

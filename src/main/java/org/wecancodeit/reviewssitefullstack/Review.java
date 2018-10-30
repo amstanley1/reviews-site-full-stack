@@ -1,8 +1,8 @@
 package org.wecancodeit.reviewssitefullstack;
 
-import java.util.Arrays;
+
 import java.util.Collection;
-import java.util.HashSet;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +29,7 @@ public class Review {
 	@ManyToOne
 	private Category category;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy = "reviews")
 	private Collection<Tag> tags;
 	
 	@OneToMany(mappedBy = "review")
@@ -67,12 +67,12 @@ public class Review {
 
 	}
 
-	public Review(String title, String content, String imageUrl, Category category, Tag...tags) {
+	public Review(String title, String content, String imageUrl, Category category) {
 		this.title = title;
 		this.content = content;
 		this.imageUrl = imageUrl;
 		this.category = category;
-		this.tags = new HashSet<>(Arrays.asList(tags));
+		
 	}
 
 	@Override

@@ -108,56 +108,58 @@ public class JpaMappingsTests {
 	
 	@Test
 	public void shouldEstablishTagsToReviewsRelationships() {
-		Tag tag = new Tag("tag");
-		tag = tagRepo.save(tag);
-		Tag tag2 = new Tag("tag2");
-		tag2 = tagRepo.save(tag2);
 		
-		Review review = reviewRepo.save(new Review("review", "content", "imageUrl", null, tag, tag2));
-		Review anotherReview = reviewRepo.save(new Review("anotherReview", "content", "imageUrl", null, tag, tag2));
-		long reviewId = review.getId();
+		Review review = reviewRepo.save(new Review("review", "content", "imageUrl", null));
+		Review anotherReview = reviewRepo.save(new Review("anotherReview", "content", "imageUrl", null));
+		
+		
+		Tag tag = new Tag("tag", review, anotherReview);
+		tag = tagRepo.save(tag);
+		Tag tag2 = new Tag("tag2", review);
+		tag2 = tagRepo.save(tag2);
+		long tagId = tag.getId();
 		
 		entityManager.flush();
 		entityManager.clear();
 		
-		Optional<Review> result = reviewRepo.findById(reviewId);
-		Review reviewResult = result.get();
-		assertThat(review.getTags(), containsInAnyOrder(tag, tag2));
+		Optional<Tag> result = tagRepo.findById(tagId);
+		Tag tagResult = result.get();
+		assertThat(tagResult.getReviews(), containsInAnyOrder(review, anotherReview));
 	}
 
 	@Test
-	public void shouldFindReviewsPerTag() {
-		Tag tag = new Tag("tag");
-		tag = tagRepo.save(tag);
-		Tag tag2 = new Tag("tag2");
-		tag2 = tagRepo.save(tag2);
+	public void shouldFindTagsPerReview() {
+		Review review = reviewRepo.save(new Review("review", "content", "imageUrl", null));
+		Review anotherReview = reviewRepo.save(new Review("anotherReview", "content", "imageUrl", null));
 		
-		Review review = reviewRepo.save(new Review("review", "content", "imageUrl", null, tag, tag2));
-		Review anotherReview = reviewRepo.save(new Review("anotherReview", "content", "imageUrl", null, tag, tag2));
+		Tag tag = new Tag("tag", review);
+		tag = tagRepo.save(tag);
+		Tag tag2 = new Tag("tag2", review, anotherReview);
+		tag2 = tagRepo.save(tag2);
 		
 		entityManager.flush();
 		entityManager.clear();
 				
-		Collection<Review> result = reviewRepo.findByTagsContains(tag);
-		assertThat(result, containsInAnyOrder(review, anotherReview));
+		Collection<Tag> result = tagRepo.findByReviewsContains(review);
+		assertThat(result, containsInAnyOrder(tag, tag2));
 	}
 	
 	@Test
-	public void shouldFindReviewsForTagsId() {
-		Tag tag = new Tag("tag");
-		tag = tagRepo.save(tag);
-		Tag tag2 = new Tag("tag2");
-		tag2 = tagRepo.save(tag2);
+	public void shouldFindTagsForReviewsId() {
+		Review review = reviewRepo.save(new Review("review", "content", "imageUrl", null));
+		Review anotherReview = reviewRepo.save(new Review("anotherReview", "content", "imageUrl", null));
 		
-		Review review = reviewRepo.save(new Review("review", "content", "imageUrl", null, tag, tag2));
-		Review anotherReview = reviewRepo.save(new Review("anotherReview", "content", "imageUrl", null, tag, tag2));
-		long tagsId = tag.getId();
+		Tag tag = new Tag("tag", review);
+		tag = tagRepo.save(tag);
+		Tag tag2 = new Tag("tag2", review, anotherReview);
+		tag2 = tagRepo.save(tag2);
+		long reviewsId = review.getId();
 		
 		entityManager.flush();
 		entityManager.clear();
 		
-		Collection<Review> result = reviewRepo.findByTagsId(tagsId);
-		assertThat(result, containsInAnyOrder(review, anotherReview));
+		Collection<Tag> result = tagRepo.findByReviewsId(reviewsId);
+		assertThat(result, containsInAnyOrder(tag, tag2));
 	}
 	
 	@Test
@@ -168,8 +170,8 @@ public class JpaMappingsTests {
 		tag = tagRepo.save(tag);
 		Tag tag2 = new Tag("tag2");
 		tag2 = tagRepo.save(tag2);
-		Review review = reviewRepo.save(new Review("review", "content", "imageUrl", category, tag));
-		Review anotherReview = reviewRepo.save(new Review("anotherReview", "content", "imageUrl", category, tag));
+		Review review = reviewRepo.save(new Review("review", "content", "imageUrl", category));
+		Review anotherReview = reviewRepo.save(new Review("anotherReview", "content", "imageUrl", category));
 		
 		entityManager.flush();
 		entityManager.clear();
@@ -188,8 +190,8 @@ public class JpaMappingsTests {
 		Tag tag2 = new Tag("tag2");
 		tag2 = tagRepo.save(tag2);
 		
-		Review review = reviewRepo.save(new Review("review", "content", "imageUrl", category, tag));
-		Review anotherReview = reviewRepo.save(new Review("anotherReview", "content", "imageUrl", category, tag));
+		Review review = reviewRepo.save(new Review("review", "content", "imageUrl", category));
+		Review anotherReview = reviewRepo.save(new Review("anotherReview", "content", "imageUrl", category));
 		long categoryId = category.getId();
 		
 		entityManager.flush();
