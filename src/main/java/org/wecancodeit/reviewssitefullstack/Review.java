@@ -10,13 +10,14 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Review {
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	private long id;
 
 	private String title;
 
@@ -30,12 +31,15 @@ public class Review {
 	
 	@ManyToMany
 	private Collection<Tag> tags;
+	
+	@OneToMany(mappedBy = "review")
+	private Collection<Comment> comments;
 
 	public Category getCategory() {
 		return category;
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -52,8 +56,11 @@ public class Review {
 	}
 	
 	public Collection<Tag> getTags() {
-	
 		return tags;
+	}
+	
+	public Collection<Comment> getComments() {
+		return comments;
 	}
 
 	public Review() {
@@ -72,7 +79,7 @@ public class Review {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
 
@@ -85,13 +92,12 @@ public class Review {
 		if (getClass() != obj.getClass())
 			return false;
 		Review other = (Review) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
+		if (id != other.id)
 			return false;
 		return true;
 	}
+
+
 
 	
 }

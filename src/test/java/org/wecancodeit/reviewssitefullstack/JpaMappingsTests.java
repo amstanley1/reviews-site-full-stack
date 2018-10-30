@@ -16,9 +16,6 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-
-
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest
 public class JpaMappingsTests {
@@ -34,6 +31,9 @@ public class JpaMappingsTests {
 	
 	@Resource
 	TagRepository tagRepo;
+
+	@Resource
+	CommentRepository commentRepo;
 	
 	@Test
 	public void shouldSaveAndLoadReview() {
@@ -122,13 +122,11 @@ public class JpaMappingsTests {
 		
 		Optional<Review> result = reviewRepo.findById(reviewId);
 		Review reviewResult = result.get();
-		
 		assertThat(review.getTags(), containsInAnyOrder(tag, tag2));
 	}
 
 	@Test
 	public void shouldFindReviewsPerTag() {
-		//topic is not the owner so we must create these first
 		Tag tag = new Tag("tag");
 		tag = tagRepo.save(tag);
 		Tag tag2 = new Tag("tag2");
@@ -137,37 +135,126 @@ public class JpaMappingsTests {
 		Review review = reviewRepo.save(new Review("review", "content", "imageUrl", null, tag, tag2));
 		Review anotherReview = reviewRepo.save(new Review("anotherReview", "content", "imageUrl", null, tag, tag2));
 		
-		
 		entityManager.flush();
 		entityManager.clear();
-			
 				
-				Collection<Review> result = reviewRepo.findByTagsContains(tag);
-				
-				assertThat(result, containsInAnyOrder(review, anotherReview));
+		Collection<Review> result = reviewRepo.findByTagsContains(tag);
+		assertThat(result, containsInAnyOrder(review, anotherReview));
 	}
 	
-	/*@Test
-	public void shouldFindCoursesForTopicId() {
-		//topic is not the owner so we must create these first
-		Topic java = topicRepo.save(new Topic("Java"));
-		Topic ruby = topicRepo.save(new Topic("Ruby"));
+	@Test
+	public void shouldFindReviewsForTagsId() {
+		Tag tag = new Tag("tag");
+		tag = tagRepo.save(tag);
+		Tag tag2 = new Tag("tag2");
+		tag2 = tagRepo.save(tag2);
 		
-		Course course1 = new Course("OO Languages", "description", java, ruby);
-		Course course2 = new Course("Java101", "description",java);
-		Course course3 = new Course("Advanced OO Languages", "description", java, ruby);
-		course1 = courseRepo.save(course1);
-		course2 = courseRepo.save(course2);
-		course3 = courseRepo.save(course3);
-		long topicId = java.getId();
-	
+		Review review = reviewRepo.save(new Review("review", "content", "imageUrl", null, tag, tag2));
+		Review anotherReview = reviewRepo.save(new Review("anotherReview", "content", "imageUrl", null, tag, tag2));
+		long tagsId = tag.getId();
+		
 		entityManager.flush();
 		entityManager.clear();
 		
-		Collection<Course> result = courseRepo.findByTopicsId(topicId);
+		Collection<Review> result = reviewRepo.findByTagsId(tagsId);
+		assertThat(result, containsInAnyOrder(review, anotherReview));
+	}
+	
+	@Test
+	public void shouldFindReviewsPerCategory() {
+		Category category = new Category("category");
+		category = categoryRepo.save(category);
+		Tag tag = new Tag("tag");
+		tag = tagRepo.save(tag);
+		Tag tag2 = new Tag("tag2");
+		tag2 = tagRepo.save(tag2);
+		Review review = reviewRepo.save(new Review("review", "content", "imageUrl", category, tag));
+		Review anotherReview = reviewRepo.save(new Review("anotherReview", "content", "imageUrl", category, tag));
 		
-		assertThat(result, containsInAnyOrder(course1, course2, course3));
-	}*/
+		entityManager.flush();
+		entityManager.clear();
+				
+		Collection<Review> result = reviewRepo.findByCategory(category);	
+		assertThat(result, containsInAnyOrder(review, anotherReview));
+	}
+	
+	@Test
+	public void shouldFindReviewsForCategoryId() {
+		Category category = new Category("category");
+		category = categoryRepo.save(category);
+		
+		Tag tag = new Tag("tag");
+		tag = tagRepo.save(tag);
+		Tag tag2 = new Tag("tag2");
+		tag2 = tagRepo.save(tag2);
+		
+		Review review = reviewRepo.save(new Review("review", "content", "imageUrl", category, tag));
+		Review anotherReview = reviewRepo.save(new Review("anotherReview", "content", "imageUrl", category, tag));
+		long categoryId = category.getId();
+		
+		entityManager.flush();
+		entityManager.clear();
+		
+		Collection<Review> result = reviewRepo.findByCategoryId(categoryId);
+		assertThat(result, containsInAnyOrder(review, anotherReview));
+	}
+	
+	@Test
+	public void shouldSaveAndLoadComment() {
+		Comment comment = commentRepo.save(new Comment("userName", "comment", null));
+		long commentId = comment.getId();
+		
+		entityManager.flush();
+		entityManager.clear();
+		
+		Optional<Comment> result = commentRepo.findById(commentId);
+		Comment commentResult = result.get();
+		assertThat(commentResult.getContent(), is("comment"));
+	}
+	
+	@Test
+	public void shouldEstablishCommentsToReviewRelationship() {
+		Review review = reviewRepo.save(new Review("review", "content", "imageUrl", null));
+		Comment comment = commentRepo.save(new Comment("userName", "content", review));
+		Comment anotherComment = commentRepo.save(new Comment("userName", "content", review));
+		
+		long reviewId = review.getId();
+		
+		entityManager.flush();
+		entityManager.clear();
+		
+		Optional<Review> result = reviewRepo.findById(reviewId);
+		Review reviewResult = result.get();
+		assertThat(reviewResult.getComments(), containsInAnyOrder(comment, anotherComment));
+	}
+	
+	@Test
+	public void shouldFindCommentsPerReview() {
+		Review review = reviewRepo.save(new Review("review", "content", "imageUrl", null));
+		Comment comment = commentRepo.save(new Comment("userName", "content", review));
+		Comment anotherComment = commentRepo.save(new Comment("userName", "content", review));
+		
+		
+		entityManager.flush();
+		entityManager.clear();
+				
+		Collection<Comment> result = commentRepo.findByReview(review);	
+		assertThat(result, containsInAnyOrder(comment, anotherComment));
+	}
+	
+	@Test
+	public void shouldFindCommentsForReviewId() {
+		Review review = reviewRepo.save(new Review("review", "content", "imageUrl", null));
+		Comment comment = commentRepo.save(new Comment("userName", "content", review));
+		Comment anotherComment = commentRepo.save(new Comment("userName", "content", review));
+		long reviewId = review.getId();
+		
+		entityManager.flush();
+		entityManager.clear();
+		
+		Collection<Comment> result = commentRepo.findByReviewId(reviewId);
+		assertThat(result, containsInAnyOrder(comment, anotherComment));
+	}
 	
 	
 }

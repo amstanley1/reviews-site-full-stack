@@ -50,6 +50,70 @@ p {
 	text-align: center;
 }
 
+#show-tags {
+	background-color: #19a337;
+	border-radius: 5px;
+	display: inline;
+	padding: .5em;
+	font-size: .75em;
+	margin: 1em;
+	box-sizing: border-box;
+}
+
+#tags-container {
+	display: flex;
+	justify-content: center;
+	padding: 0;
+}
+
+#show-tags:hover {
+	background-color: #777;
+}
+
+.comment {
+	border: 1px solid white;
+	padding: 1em;
+	width: 75%;
+	margin: 0 auto;
+}
+
+#comments-container h4 {
+	font-weight: bold;
+	color: white;
+}
+
+#comments-container h2 {
+	color: white;
+	text-align: center;
+}
+
 a:hover, .category:hover {
 	color: grey;
+}
+
+#add-comment {
+	color: white;
+}
+
+textarea {
+	width: 75%;
+	height: 200px;
+}
+
+button#add-tag-button {
+	margin: 0 auto;
+	display: block;
+	background-color: white;
+	border: none;
+	padding: 1em;
+	font-weight: bold;
+}
+
+#add-tag {
+	width: 100%;
+}
+
+#tag-input {
+	margin: 0 auto;
+	display: block;
 }

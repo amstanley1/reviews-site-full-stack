@@ -78,6 +78,15 @@ p {
 	color: grey;
 } 
 
+#show-tags {
+	background-color: #19a337;
+	border-radius: 5px;
+}
+
+#show-tags:hover {
+	background-color: #777;
+	
+
 .flex-container {
 	display: flex;
 	justify-content: space-between;

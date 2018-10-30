@@ -22,20 +22,33 @@ public class ReviewControllerTest {
 	@Mock
 	private Review review;
 	
-	
 	private Review anotherReview;
 	
 	@Mock
 	private Category category;
 	
-	
 	private Category anotherCategory;
+	
+	@Mock
+	private Tag tag;
+	
+	private Tag anotherTag;
+	
+	@Mock
+	private Comment comment;
+	private Comment anotherComment;
 	
 	@Mock
 	private ReviewRepository reviewRepo;
 	
 	@Mock
 	private CategoryRepository categoryRepo;
+	
+	@Mock
+	private TagRepository tagRepo;
+	
+	@Mock
+	private CommentRepository commentRepo;
 	
 	@Mock
 	private Model model;
@@ -76,6 +89,24 @@ public class ReviewControllerTest {
 		underTest.findAllReviews(model);
 		verify(model).addAttribute("reviews", allReviews);
 	}
+	
+	@Test
+	public void shouldAddSingleTagToModel() throws TagNotFoundException {
+		long arbitraryTagId = 1;
+		when(tagRepo.findById(arbitraryTagId)).thenReturn(Optional.of(tag));
+		underTest.findOneTag(arbitraryTagId, model);
+		verify(model).addAttribute("tag", tag);
+	}
+	
+	@Test
+	public void shouldAddAllTagsToModel() {
+		Collection<Tag> allTags = asList(tag, anotherTag);
+		when(tagRepo.findAll()).thenReturn(allTags);
+		underTest.findAllTags(model);
+		verify(model).addAttribute("tags", allTags);
+	}
+	
+	
 	
 	
 	
