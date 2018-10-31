@@ -21,7 +21,7 @@ public class ReviewRestController {
 	@Resource
 	TagRepository tagRepo;
 	
-	@GetMapping("/api/review/{id}/tags")
+	@GetMapping("/api/reviews/{id}/tags")
 	public Iterable<Tag> getAllTags(@PathVariable Long id) {
 		Optional<Review> result = reviewRepo.findById(id);
 		Review reviewResult = result.get();
@@ -29,12 +29,7 @@ public class ReviewRestController {
 		return tags;
 	}
 	
-	@PostMapping("/api/review/{id}/tags")
-	public Tag createTag(@RequestBody Tag newTag) {
-		return tagRepo.save(newTag);
-	}
-	
-	@GetMapping("/api/review/{id}")
+	@GetMapping("/api/reviews/{id}")
 	public Review getReview(@PathVariable Long id) {
 		return reviewRepo.findById(id).get();
 	}
