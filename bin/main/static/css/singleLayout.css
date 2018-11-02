@@ -117,3 +117,15 @@ button.add-tag-button {
 	margin: 0 auto;
 	display: block;
 }
+
+#tags-header {
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.5em;
+}
+
+#category-header {
+	text-align: center;
+	font-weight: bold;
+	font-size: 2em;
+}

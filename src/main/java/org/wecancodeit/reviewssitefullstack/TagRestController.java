@@ -54,6 +54,7 @@ public class TagRestController {
 		//if review.tags contains tag
 		Collection<Review> tagReviews = newTag.getReviews();
 		if(tagReviews.contains(review)) {
+			newTag = null;
 			return newTag;
 		} else {
 			//else review.tags  add tag
@@ -69,9 +70,40 @@ public class TagRestController {
 	/*	Collection<Review> newTagReviews = newTag.getReviews();
 		Optional<Review> reviewResult = reviewRepo.findById(reviewId);
 		Review review = reviewResult.get();
-		newTagReviews.add(review);*/
-		//return tagRepo.save(newTag);
+		newTagReviews.add(review);
+		return tagRepo.save(newTag);*/
 	}
 	
-	
+	@PutMapping("/api/reviews/{reviewId}/tags/{tagId}/remove")
+	public boolean removeTag(@PathVariable long reviewId, @PathVariable long tagId) throws ReviewNotFoundException {
+		//Get tag from repository
+		Optional<Tag> tagResult = tagRepo.findById(tagId);
+		Tag removeTag = null;
+		//if tag present
+		if (tagResult.isPresent()) {
+			removeTag = tagResult.get();
+		}
+		//get the review from repository
+		Optional<Review> reviewResult = reviewRepo.findById(reviewId);
+		
+		//if review not present, throw review not found exception
+		if (!reviewResult.isPresent()) {
+			throw new ReviewNotFoundException();
+		}
+		Review review = reviewResult.get();
+		//if review.tags contains tag, remove tag
+		Collection<Review> tagReviews = removeTag.getReviews();
+		if(tagReviews.contains(review)) {
+			tagReviews.remove(review);
+		}
+		if(tagReviews.isEmpty()) {
+			tagRepo.delete(removeTag);
+		} else {
+	      //save review to repo
+		tagRepo.save(removeTag);
+		}
+			
+		 //return tag
+		return true;
+	}
 }

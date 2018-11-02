@@ -13,17 +13,20 @@
 	<h1 th:text="${review.title}"></h1>
 	<p>
 		<!-- Category: -->
+		<p id="category-header">Category:</p>
 		<a th:href="@{${'http://localhost:8080/category?id=' + category.id}}"><span
 			class="category" th:text="${category.name}"></span></a>
 	</p>
+	<br />
 		<!-- Tags: -->
 		<div>
+			<p id="tags-header">Tags:</p>
 			<ul id = "tags-container">
-			
 				<li th:each="tag: ${tags}" id="show-tags">
-					<a class="tag" th:text="${tag.name}"  th:href="@{/tag(id=${tag.Id})}">
+					<a class="tag" th:text="${tag.name}"  th:href="@{/tag(id=${tag.Id})}" th:data-id="${tag.id}">
 					
-					</a>
+					</a><span class="delete" th:data-id="${tag.id}">DELETE</span>
+					
 					
 				</li>
 			
