@@ -36,6 +36,9 @@ public class ReviewControllerMockMvcTest {
 	private CategoryRepository categoryRepo;
 	
 	@MockBean
+	private CommentRepository commentRepo;
+	
+	@MockBean
 	private TagRepository tagRepo;
 	
 	@Mock
@@ -184,12 +187,4 @@ public class ReviewControllerMockMvcTest {
 		when(tagRepo.findAll()).thenReturn(allTags);
 		mvc.perform(get("/show-tags")).andExpect(model().attribute("tags", is(allTags)));
 	}
-	
-	
-	
-	
-	
-
-	
-
 }
