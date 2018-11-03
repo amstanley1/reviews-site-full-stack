@@ -6,10 +6,16 @@
 	<link
 		th:href="@{https://fonts.googleapis.com/css?family=Roboto:400,700}"
 		rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 	<link href="../static/css/singleLayout.css"
 		th:href="@{/css/singleLayout.css}" rel="stylesheet" />
+	
+
+	
 </head>
 <body>
+
+	<a href="http://localhost:8080/show-reviews">Back to all reviews</a>
 	<h1 th:text="${review.title}"></h1>
 	<p>
 		<!-- Category: -->
@@ -22,10 +28,9 @@
 		<div>
 			<p id="tags-header">Tags:</p>
 			<ul id = "tags-container">
-				<li th:each="tag: ${tags}" id="show-tags">
-					<a class="tag" th:text="${tag.name}"  th:href="@{/tag(id=${tag.Id})}" th:data-id="${tag.id}">
-					
-					</a><span class="delete" th:data-id="${tag.id}">DELETE</span>
+				<li th:each="tag: ${tags}" class="show-tags">
+					<a class="tag" th:text="${tag.name}"  th:href="@{/tag(id=${tag.Id})}" th:data-id="${tag.id}"></a>
+					<a href = "javascript:void(0)" class="delete" th:data-id="${tag.id}"><i class="fa fa-trash" aria-hidden="true"></i></a>
 					
 					
 				</li>
@@ -39,14 +44,13 @@
 	<hr />
 	<img th:src="@{${'/images/' + review.imageUrl}}" />
 	<p th:text="${review.content}"></p>
-	<a href="http://localhost:8080/show-reviews">Back to all reviews</a>
 	<form method="POST" id="add-comment">
 		<div>
-			<label>UserName:</label>
-			<input type="text" name="userName" />
+			<label id="usernameLabel">Username:</label>
+			<input type="text" name="userName" value = "Anonymous" />
 		</div>
 		<div>
-			<label>Comment</label>
+			<label id="commentLabel">Comment:</label>
 			<textarea name="content"></textarea>
 		</div>
 		<input type="hidden" id="review-id" name="reviewId" th:attr="value = ${review.id}" />

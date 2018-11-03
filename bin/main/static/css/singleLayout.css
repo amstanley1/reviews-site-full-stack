@@ -50,7 +50,7 @@ p {
 	text-align: center;
 }
 
-#show-tags {
+.show-tags {
 	background-color: #19a337;
 	border-radius: 5px;
 	display: inline;
@@ -66,7 +66,7 @@ p {
 	padding: 0;
 }
 
-#show-tags:hover {
+.show-tags:hover {
 	background-color: #777;
 }
 
@@ -93,10 +93,12 @@ a:hover, .category:hover {
 
 #add-comment {
 	color: white;
+	width: 75%;
+	margin: 0 auto;
 }
 
 textarea {
-	width: 75%;
+	width: 100%;
 	height: 200px;
 }
 
@@ -122,10 +124,33 @@ button.add-tag-button {
 	text-align: center;
 	font-weight: bold;
 	font-size: 1.5em;
+	margin-top: 0;
 }
 
 #category-header {
 	text-align: center;
 	font-weight: bold;
 	font-size: 2em;
+	margin-bottom: 0;
 }
+
+.tag, .delete {
+	display: inline;
+}
+
+.tag {
+	margin-right: 3px;
+}
+
+.delete {
+	font-size: 1.5em;
+}
+
+.tag:hover, .delete:hover {
+	color: #999;
+}
+
+#usernameLabel, #commentLabel {
+	display: block;
+}
+

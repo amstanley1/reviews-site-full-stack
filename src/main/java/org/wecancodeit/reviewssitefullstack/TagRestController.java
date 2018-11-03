@@ -60,18 +60,10 @@ public class TagRestController {
 			//else review.tags  add tag
 			tagReviews.add(review);
 		}
-		  
 	      //save review to repo
 			tagRepo.save(newTag);
 		 //return tag
 		return newTag;
-
-		
-	/*	Collection<Review> newTagReviews = newTag.getReviews();
-		Optional<Review> reviewResult = reviewRepo.findById(reviewId);
-		Review review = reviewResult.get();
-		newTagReviews.add(review);
-		return tagRepo.save(newTag);*/
 	}
 	
 	@PutMapping("/api/reviews/{reviewId}/tags/{tagId}/remove")
@@ -102,7 +94,6 @@ public class TagRestController {
 	      //save review to repo
 		tagRepo.save(removeTag);
 		}
-			
 		 //return tag
 		return true;
 	}
