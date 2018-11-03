@@ -75,17 +75,33 @@ public class ReviewPopulator implements CommandLineRunner {
 		theCabinInTheWoods = reviewRepo.save(theCabinInTheWoods);
 		ladyBird = reviewRepo.save(ladyBird);
 		
-		Tag dramaTag = new Tag("Drama", titanic, ladyBird);
-		Tag comedyTag = new Tag("Comedy", theCabinInTheWoods, gameNight, bridesmaids);
-		Tag horrorTag = new Tag("Horror", theCabinInTheWoods, theWitch);
-		Tag thrillerTag = new Tag("Thriller", girlOnTheTrain, jurassicWorld);
-		Tag actionTag = new Tag("Action", lastJedi, jurassicWorld);
+		Tag dramaTag = new Tag("drama", titanic, ladyBird);
+		Tag comedyTag = new Tag("comedy", theCabinInTheWoods, gameNight, bridesmaids);
+		Tag horrorTag = new Tag("horror", theCabinInTheWoods, theWitch);
+		Tag thrillerTag = new Tag("thriller", girlOnTheTrain, jurassicWorld);
+		Tag actionTag = new Tag("action", lastJedi, jurassicWorld);
+		Tag dinosaurs = new Tag("dinosaurs", jurassicWorld);
+		Tag space = new Tag("space", lastJedi);
+		Tag witch = new Tag("witch", theWitch);
+		Tag witches = new Tag("witches", theWitch);
+		Tag wedding = new Tag("wedding", bridesmaids);
+		Tag train = new Tag("train", girlOnTheTrain);
+		Tag titanicTag = new Tag("titanic", titanic);
+		Tag A24 = new Tag("A24", theWitch);
 		
 		dramaTag = tagRepo.save(dramaTag);
 		comedyTag = tagRepo.save(comedyTag);
 		horrorTag = tagRepo.save(horrorTag);
 		thrillerTag = tagRepo.save(thrillerTag);
 		actionTag = tagRepo.save(actionTag);
+		dinosaurs = tagRepo.save(dinosaurs);
+		space = tagRepo.save(space);
+		witch = tagRepo.save(witch);
+		witches = tagRepo.save(witches);
+		wedding = tagRepo.save(wedding);
+		train = tagRepo.save(train);
+		titanicTag = tagRepo.save(titanicTag);
+		A24 = tagRepo.save(A24);
 		
 		Comment commentLastJedi = new Comment("Anonymous", "ancient alien gods nazca lines golden disk astronaut aircraft , i know it sounds crazy... Ancient civilization easter island earth mound anti-gravity, sky people astronaut i know it sounds crazy... Vymaanika-shaastra. extraterrestrial inter-dimensional earth mound the vedas alien mystery, clearly nazca lines extraterrestrial kachina doll earth mound, chariot of the gods vortex . nazca lines worm hole king soloman von daniken sky people ufo crystal skull, vymaanika-shaastra mahabharata clearly magnetic current petroglyph nazca lines . chariot of the gods star people von daniken aircraft earth mound vymaanika-shaastra , targeted mutation gods electromagnetic petroglyph nasa pre-colonial aerodynamics easter island , space travel king soloman worm hole burmuta triangle elongated skull.\r\n" + 
 				"\r\n" + 
