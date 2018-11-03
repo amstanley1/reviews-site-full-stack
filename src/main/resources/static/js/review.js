@@ -62,9 +62,12 @@
 		var deleteTagAnchor = document.createElement('a');
 		var deleteTagIcon = document.createElement('i');
 		newTagAnchor.setAttribute('class', 'tag');
+		newTagAnchor.setAttribute('href', '/tag?id=' + newTag.id);
 		newTagAnchor.textContent = newTag.name;
+		newTagAnchor.setAttribute('data-id', newTag.id);
 		deleteTagAnchor.setAttribute('class', 'delete');
 		deleteTagAnchor.setAttribute('data-id', newTag.id);
+		deleteTagAnchor.setAttribute('href', 'javascript:void(0)');
 		deleteTagAnchor.innerHTML = '<i class="fa fa-trash" aria-hidden="true"></i>';
 		tagList.appendChild(tagListItem);
 		tagListItem.appendChild(newTagAnchor);
